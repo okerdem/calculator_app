@@ -14,7 +14,7 @@ class _BoardState extends State<Board> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orange.shade50,
+      backgroundColor: Colors.grey.shade400,
       body: Column(
         children: [
           Spacer(),
@@ -23,6 +23,8 @@ class _BoardState extends State<Board> {
             child: TextField(
               textAlign: TextAlign.center,
               decoration: InputDecoration(
+                  fillColor: Colors.grey.shade100,
+                  filled: true,
                   border: OutlineInputBorder(),
                   hintText: ":3",
                   labelText: _textField,
@@ -56,7 +58,11 @@ class _BoardState extends State<Board> {
                   },
                   child: Text("3")),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    _textField += "+";
+                  });
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.amber.shade100,
                 ),
@@ -75,20 +81,42 @@ class _BoardState extends State<Board> {
               Spacer(),
               Padding(
                 padding: EdgeInsets.only(top: 8),
-                child: ElevatedButton(onPressed: null, child: Text("4")),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 8),
-                child: ElevatedButton(onPressed: null, child: Text("5")),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 8),
-                child: ElevatedButton(onPressed: null, child: Text("6")),
+                child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _textField += "4";
+                      });
+                    },
+                    child: Text("4")),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 8),
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        _textField += "5";
+                      });
+                    },
+                    child: Text("5")),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 8),
+                child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _textField += "6";
+                      });
+                    },
+                    child: Text("6")),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 8),
+                child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _textField += "-";
+                      });
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.amber.shade100,
                     ),
@@ -107,20 +135,42 @@ class _BoardState extends State<Board> {
               Spacer(),
               Padding(
                 padding: EdgeInsets.only(top: 8),
-                child: ElevatedButton(onPressed: null, child: Text("7")),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 8),
-                child: ElevatedButton(onPressed: null, child: Text("8")),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 8),
-                child: ElevatedButton(onPressed: null, child: Text("9")),
+                child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _textField += "7";
+                      });
+                    },
+                    child: Text("7")),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 8),
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        _textField += "8";
+                      });
+                    },
+                    child: Text("8")),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 8),
+                child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _textField += "9";
+                      });
+                    },
+                    child: Text("9")),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 8),
+                child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _textField += "x";
+                      });
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.amber.shade100,
                     ),
@@ -137,10 +187,29 @@ class _BoardState extends State<Board> {
           Row(
             children: [
               Spacer(),
-              Spacer(),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.amber.shade100,
+                    ),
+                    child: Text(
+                      "Clr",
+                      style: TextStyle(
+                        color: Colors.orange,
+                      ),
+                    )),
+              ),
               Padding(
                 padding: EdgeInsets.only(top: 8),
-                child: ElevatedButton(onPressed: null, child: Text("0")),
+                child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _textField += "0";
+                      });
+                    },
+                    child: Text("0")),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
@@ -160,7 +229,11 @@ class _BoardState extends State<Board> {
               Padding(
                 padding: EdgeInsets.only(top: 8),
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        _textField += "/";
+                      });
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.amber.shade100,
                     ),
