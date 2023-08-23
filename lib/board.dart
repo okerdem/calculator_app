@@ -9,7 +9,7 @@ class Board extends StatefulWidget {
 }
 
 class _BoardState extends State<Board> {
-  double _result = 0;
+  String result = "";
   String _textField = "";
   @override
   Widget build(BuildContext context) {
@@ -59,6 +59,9 @@ class _BoardState extends State<Board> {
                   child: Text("3")),
               ElevatedButton(
                 onPressed: () {
+                  if (_textField == "") {
+                    return;
+                  }
                   setState(() {
                     _textField += "+";
                   });
@@ -167,6 +170,9 @@ class _BoardState extends State<Board> {
                 padding: EdgeInsets.only(top: 8),
                 child: ElevatedButton(
                     onPressed: () {
+                      if (_textField == "") {
+                        return;
+                      }
                       setState(() {
                         _textField += "x";
                       });
@@ -190,7 +196,11 @@ class _BoardState extends State<Board> {
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      setState(() {
+                        _textField = "";
+                      });
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.amber.shade100,
                     ),
@@ -214,7 +224,12 @@ class _BoardState extends State<Board> {
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      result = calculate(_textField).toString();
+                      _textField = result;
+                    });
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.amber.shade100,
                   ),
@@ -230,6 +245,9 @@ class _BoardState extends State<Board> {
                 padding: EdgeInsets.only(top: 8),
                 child: ElevatedButton(
                     onPressed: () {
+                      if (_textField == "") {
+                        return;
+                      }
                       setState(() {
                         _textField += "/";
                       });
