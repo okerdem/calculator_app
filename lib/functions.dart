@@ -1,25 +1,46 @@
-double calculate(String text) {
+//
+String calculate(String text) {
   //
-  List list = text.split("");
+  List<String> list = text.split("");
 
-  double result = double.parse(list[0]);
+  double result = double.parse(getNumber(list, 0));
 
-  for (var i = 0; i < list.length; i++) {
-    if (list[i] == "/") {}
+  for (int i = 0; i < list.length; i++) {
     switch (list[i]) {
       case "+":
-        result += double.parse(list[i + 1]);
+        result += double.parse(getNumber(list, i + 1));
         break;
       case "-":
-        result -= double.parse(list[i + 1]);
+        result -= double.parse(getNumber(list, i + 1));
         break;
       case "x":
-        result *= double.parse(list[i + 1]);
+        result *= double.parse(getNumber(list, i + 1));
         break;
       case "/":
-        result /= double.parse(list[i + 1]);
+        result /= double.parse(getNumber(list, i + 1));
+        break;
       default:
+        break;
     }
   }
-  return double.parse(result.toStringAsFixed(5));
+  return result.toStringAsFixed(5);
+}
+
+//
+String getNumber(List<String> list, int index) {
+  //
+  String result = "";
+
+  while (index < list.length) {
+    if (!list[index].contains("+") &&
+        !list[index].contains("-") &&
+        !list[index].contains("x") &&
+        !list[index].contains("/")) {
+      result += list[index];
+      index++;
+    } else {
+      break;
+    }
+  }
+  return result;
 }

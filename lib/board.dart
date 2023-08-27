@@ -226,8 +226,7 @@ class _BoardState extends State<Board> {
                 child: ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      result = calculate(_textField).toString();
-                      _textField = result;
+                      _textField = calculate(_textField);
                     });
                   },
                   style: ElevatedButton.styleFrom(
