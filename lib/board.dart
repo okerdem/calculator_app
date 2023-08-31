@@ -268,5 +268,6 @@ class _BoardState extends State<Board> {
         ],
       ),
     );
+    // add bracket and back button. use back button with stack
   }
 }
