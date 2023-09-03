@@ -1,3 +1,4 @@
+// fix removeAt uses
 //
 String calculate(String text) {
   // spliting and adding the string in the _textField to the list
@@ -22,7 +23,7 @@ String calculate(String text) {
     if (subList.contains("/")) {
       if (first) {
         // add the first number to result variable
-        result = double.parse(subList[subList.indexOf("/") - 1]);
+        result = double.parse(backNumber(subList, subList.indexOf("/") - 1));
         // remove the first number added to result variable from list with cascade notation
         subList..removeAt(subList.indexOf("/") - 1);
         first = false;
@@ -36,18 +37,18 @@ String calculate(String text) {
       subList[subList.indexOf("/")] = result.toString();
     }
 
-    // search for "*" operator for priority
+    // search for "x" operator for priority
     if (subList.contains("x")) {
       if (first) {
         // add the first number to result variable
-        result = double.parse(subList[subList.indexOf("x") - 1]);
+        result = double.parse(backNumber(subList, subList.indexOf("x") - 1));
         // remove the first number added to result variable from list with cascade notation
         subList..removeAt(subList.indexOf("x") - 1);
         first = false;
       }
 
-      // multiply the result variable with the number after "*" operator
-      result /= double.parse(subList[subList.indexOf("x") + 1]);
+      // multiply the result variable with the number after "x" operator
+      result *= double.parse(subList[subList.indexOf("x") + 1]);
 
       // remove and relocate calculated values with the result
       subList..removeAt(subList.indexOf("x") + 1);
@@ -71,7 +72,11 @@ String calculate(String text) {
       }
     }
 
-    // remove and relocate the calculated values from top list<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< seperate operations to functions for clean code
+    // remove and relocate the calculated values from top list
+    for (var i = list.indexOf("("); i < list.indexOf(")"); i++) {
+      list.remove(list[i]);
+    }
+    list[list.indexOf(")")] = result.toString();
   }
 
   // calculations wiithout brackets
@@ -79,8 +84,8 @@ String calculate(String text) {
   if (list.contains("/")) {
     if (first) {
       // add the first number to result variable
-      result = double.parse(list[list.indexOf("/") - 1]);
-      // remove the first number added to result variable from list with cascade notation
+      result = double.parse(backNumber(list, list.indexOf("/") - 1));
+      // remove the first number added to result variable from list
       list..removeAt(list.indexOf("/") - 1);
       first = false;
     }
@@ -91,18 +96,18 @@ String calculate(String text) {
     list..removeAt(list.indexOf("/") + 1);
     list[list.indexOf("/")] = result.toString();
   }
-  // search for "*" operator for priority
+  // search for "x" operator for priority
   if (list.contains("x")) {
     if (first) {
       // add the first number to result variable
-      result = double.parse(list[list.indexOf("x") - 1]);
-      // remove the first number added to result variable from list with cascade notation
+      result = double.parse(backNumber(list, list.indexOf("x") - 1));
+      // remove the first number added to result variable from list
       list..removeAt(list.indexOf("x") - 1);
       first = false;
     }
 
-    // multiply the result variable with the number after "*" operator
-    result /= double.parse(list[list.indexOf("x") + 1]);
+    // multiply the result variable with the number after "x" operator
+    result *= double.parse(list[list.indexOf("x") + 1]);
 
     // remove and relocate calculated values with the result
     list..removeAt(list.indexOf("x") + 1);
@@ -125,7 +130,7 @@ String calculate(String text) {
         break;
     }
   }
-  return result.toStringAsFixed(5);
+  return result.toStringAsFixed(1);
 }
 
 // get numbers between operators
@@ -140,6 +145,24 @@ String getNumber(List<String> list, int index) {
         !list[index].contains("/")) {
       result += list[index];
       index++;
+    } else {
+      break;
+    }
+  }
+  return result;
+}
+
+// to get the first number of prioritized operator loop backwards till non number item
+String backNumber(List<String> list, int index) {
+  String result = "";
+  while (index > -1) {
+    if (!list[index].contains("(") &&
+        !list[index].contains("+") &&
+        !list[index].contains("-") &&
+        !list[index].contains("x") &&
+        !list[index].contains("/")) {
+      result += list[index];
+      index--;
     } else {
       break;
     }
