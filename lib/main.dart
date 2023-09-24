@@ -1,4 +1,3 @@
-import 'package:calculator_app/board.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +16,7 @@ class _CalculatorState extends State<Calculator> {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Board(),
+      home: null,
     );
   }
 }
